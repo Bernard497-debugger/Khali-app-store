@@ -1,0 +1,145 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', 'Roboto', sans-serif;
+    background: linear-gradient(to right, #e0f7fa, #ffffff);
+    color: #333;
+}
+
+header {
+    background: linear-gradient(135deg, #0077cc, #00b894);
+    color: white;
+    padding: 40px 10px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 2.8em;
+    margin-bottom: 10px;
+}
+
+.subhead {
+    font-size: 1.2em;
+    opacity: 0.9;
+}
+
+.search-bar {
+    margin-top: 20px;
+    padding: 14px 18px;
+    width: 300px;
+    max-width: 90%;
+    border-radius: 30px;
+    border: none;
+    font-size: 1em;
+    outline: none;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.app-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 25px;
+    padding: 40px 5%;
+}
+
+.app-card {
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.app-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+.icon {
+    width: 90px;
+    height: 90px;
+    border-radius: 20%;
+    margin-bottom: 15px;
+}
+
+.app-card h2 {
+    color: #0077cc;
+    margin: 10px 0 5px;
+}
+
+.app-card p {
+    font-size: 0.95em;
+    color: #444;
+}
+
+.download-btn {
+    background: #28a745;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 12px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.download-btn:hover {
+    background: #1f8b36;
+}
+
+footer {
+    text-align: center;
+    padding: 25px 10px;
+    background: #f4f4f4;
+    color: #666;
+    font-size: 0.95em;
+    margin-top: 40px;
+}
+
+form input, form textarea, form select {
+    width: 90%;
+    max-width: 400px;
+    padding: 12px;
+    margin: 10px 0;
+    font-size: 1em;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+form input:focus, form textarea:focus {
+    border-color: #0077cc;
+}
+
+form button {
+    padding: 12px 24px;
+    background: #0077cc;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.3s ease;
+}
+
+form button:hover {
+    background: #005fa3;
+}
+
+form button[type="submit"][style*="color:red"] {
+    background: #e53935;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.9em;
+    cursor: pointer;
+}
+
+form button[type="submit"][style*="color:red"]:hover {
+    background: #c62828;
+}
