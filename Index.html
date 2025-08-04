@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Khali App Store</title>
+  <style>
+    body {
+      background-color: #0e0e0e;
+      color: #e0e0e0;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #00ff88;
+    }
+    .app-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .app-card {
+      background-color: #1c1c1c;
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+    .app-card img {
+      max-width: 80px;
+      border-radius: 8px;
+    }
+    .app-details {
+      flex-grow: 1;
+    }
+    .app-name {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #0f0;
+    }
+    .app-desc {
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+    .download-btn {
+      background-color: #00ff88;
+      color: #000;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>📱 Khali App Store</h1>
+  <div class="app-container">
+    {% for app in apps %}
+    <div class="app-card">
+      {% if app.image %}
+        <img src="/uploads/{{ app.image }}" alt="App Image">
+      {% endif %}
+      <div class="app-details">
+        <div class="app-name">{{ app.name }}</div>
+        <div class="app-desc">{{ app.description }}</div>
+        <a href="/uploads/{{ app.apk }}" class="download-btn">Download</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</body>
+</html>
