@@ -1,0 +1,67 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khali App Store</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f5f7; }
+  header, footer { background: #222; color: #fff; text-align: center; padding: 1rem; }
+  .container { padding: 1rem; max-width: 1200px; margin: 0 auto; }
+  .toolbar { display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; justify-content: center; }
+  .toolbar input, .toolbar select { padding: 0.5rem; border-radius: 8px; border: 1px solid #ccc; width: 200px; }
+  .app-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+  .app-card { background: #fff; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); padding: 1rem; text-align: center; transition: transform 0.2s, box-shadow 0.2s; }
+  .app-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+  .app-card h3 { margin: 0.5rem 0; font-size: 1.1rem; }
+  .btn { display: inline-block; padding: 0.5rem 1rem; border: none; border-radius: 6px; background: #0d6efd; color: #fff; cursor: pointer; text-decoration: none; transition: background 0.2s; }
+  .btn:hover { background: #0b5ed7; }
+  .btn.uninstall { background: #dc3545; }
+  .btn.uninstall:hover { background: #bb2d3b; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Khali App Store</h1>
+</header>
+<div class="container">
+  <div class="toolbar">
+    <input type="text" id="search" placeholder="Search apps...">
+    <select id="category">
+      <option value="All">All Categories</option>
+      <option value="Utilities">Utilities</option>
+      <option value="Games">Games</option>
+      <option value="Music">Music</option>
+    </select>
+    <select id="view">
+      <option value="store">Store</option>
+      <option value="installed">My Apps</option>
+    </select>
+  </div>
+  <div class="app-grid" id="appGrid"></div>
+</div>
+<footer>
+  <p>© Khali App Store 2025</p>
+</footer>
+<script>
+const apps = [
+  {id:'chat', name:'Chat Messenger', category:'Utilities'},
+  {id:'music', name:'Music Player', category:'Music'},
+  {id:'photo', name:'Photo Editor', category:'Utilities'},
+  {id:'game1', name:'Orbit Runner', category:'Games'},
+  {id:'game2', name:'ChessX', category:'Games'},
+  {id:'notes', name:'Pixel Notes', category:'Utilities'}
+];
+let installed = [];function renderApps() { const grid = document.getElementById('appGrid'); const search = document.getElementById('search').value.toLowerCase(); const category = document.getElementById('category').value; const view = document.getElementById('view').value;
+
+let filtered = apps.filter(app => { let match = app.name.toLowerCase().includes(search); if(category !== 'All') match = match && app.category === category; if(view === 'installed') match = match && installed.includes(app.id); return match; });
+
+grid.innerHTML = filtered.map(app => { const isInstalled = installed.includes(app.id); return <div class="app-card"> <h3>${app.name}</h3> <p>${app.category}</p> <button class="btn ${isInstalled ? 'uninstall' : ''}" onclick="toggleInstall('${app.id}')">${isInstalled ? 'Uninstall' : 'Install'}</button> </div>; }).join(''); }
+
+function toggleInstall(id) { if(installed.includes(id)) { installed = installed.filter(a => a !== id); } else { installed.push(id); } renderApps(); }
+
+document.getElementById('search').addEventListener('input', renderApps); document.getElementById('category').addEventListener('change', renderApps); document.getElementById('view').addEventListener('change', renderApps);
+
+renderApps(); </script>
+
+</body>
+</html>
