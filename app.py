@@ -5,13 +5,13 @@ app = Flask(__name__)
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-# Store apps in memory (or file-based DB later)
+# In-memory storage (MVP, resets when server restarts)
 apps = []
 
-# Create upload folder if not exists
+# Ensure uploads folder exists
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-# Load templates directly from file
+# Load templates directly
 def load_template(filename):
     with open(filename, 'r', encoding='utf-8') as f:
         return f.read()
@@ -27,17 +27,14 @@ def admin():
         name = request.form['name']
         desc = request.form['description']
         file = request.files['file']
-        image = request.files['image']
         
-        if file and image:
-            file.save(os.path.join(UPLOAD_FOLDER, file.filename))
-            image.save(os.path.join(UPLOAD_FOLDER, image.filename))
-            
+        if file:
+            filepath = os.path.join(UPLOAD_FOLDER, file.filename)
+            file.save(filepath)
             apps.append({
                 'name': name,
                 'description': desc,
-                'filename': file.filename,
-                'image': image.filename
+                'filename': file.filename
             })
         return redirect('/admin')
     
@@ -48,7 +45,6 @@ def delete(index):
     try:
         app_data = apps.pop(index)
         os.remove(os.path.join(UPLOAD_FOLDER, app_data['filename']))
-        os.remove(os.path.join(UPLOAD_FOLDER, app_data['image']))
     except:
         pass
     return redirect('/admin')
